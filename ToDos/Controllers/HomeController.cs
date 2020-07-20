@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDos.Models;
+using System.Collections.Generic;
 
 namespace ToDos.Controllers
 {
@@ -9,7 +10,6 @@ namespace ToDos.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-
       List<Item> allItems = Item.GetAll();
       return View(allItems);
     }
