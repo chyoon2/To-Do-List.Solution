@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ToDos
+namespace ToDoList
 {
   public class Startup
   {
@@ -25,6 +25,8 @@ namespace ToDos
 
     public void Configure(IApplicationBuilder app)
     {
+      app.UseStaticFiles();
+
       app.UseDeveloperExceptionPage();
 
       app.UseMvc(routes =>
@@ -34,11 +36,15 @@ namespace ToDos
           template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-        app.Run(async (context) =>
-        {
-          await context.Response.WriteAsync("Something went wrong!");
-        });
-
+      app.Run(async (context) =>
+      {
+        await context.Response.WriteAsync("Something went wrong!");
+      });
     }
+  }
+
+  public static class DBConfiguration
+  {
+    public static string ConnectionString = "server=localhost;user id=root;password=epicodus;port=3306;database=to_do_list;";
   }
 }
