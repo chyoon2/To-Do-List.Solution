@@ -52,6 +52,7 @@ namespace ToDoList.Controllers
       _db.Entry(category).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
+      //insignificant change
     }
 
     public ActionResult Delete(int id)
