@@ -36,11 +36,10 @@ namespace ToDoList.Controllers
 
     public ActionResult Details(int id)
     {
-      Category thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
-      Viewbag.ItemId = new List(_db.Items, "ItemId", "Name")
+      Category thisCategory = _db.Categories.Include(category => category.Items).FirstOrDefault(category => category.CategoryId == id);
       return View(thisCategory);
     }
-
+    
     public ActionResult Edit(int id)
     {
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
