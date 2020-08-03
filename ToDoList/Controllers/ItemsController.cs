@@ -27,16 +27,17 @@ namespace ToDoList.Controllers
       ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
       return View(thisItem);
     } 
+
     [HttpPost]
     public ActionResult Edit(Item item, int CategoryId)
     {
       if(CategoryId !=0)  
-    {
-      _db.CategoryItem.Add(new CategoryItem() {CategoryId = CategoryId, ItemId = item.ItemId});
-    } 
-      _db.Entry(item).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      {
+        _db.CategoryItem.Add(new CategoryItem() {CategoryId = CategoryId, ItemId = item.ItemId});
+      } 
+        _db.Entry(item).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       
     }
 
@@ -61,7 +62,7 @@ namespace ToDoList.Controllers
     public ActionResult Details(int id)
     {
       var thisItem = _db.Items
-        .Include(item => item.Categories)
+        .Include(item => item.Categories)// join enitities of categoryitem.
         .ThenInclude(join => join.Category)
         .FirstOrDefault(item => item.ItemId == id);
       return View(thisItem);
@@ -106,6 +107,14 @@ namespace ToDoList.Controllers
       _db.CategoryItem.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult MarkComplete(Item item)
+    {
+      _db.Entry(item).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = item.ItemId});
     }
   }
 }

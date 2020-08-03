@@ -7,9 +7,11 @@ namespace ToDoList.Models
     public Item()
     {
       this.Categories = new HashSet<CategoryItem>();
+      Complete = false;
     }
     
     public int ItemId {get; set;}
+    public bool Complete {get; set;}
     public string Description {get; set;}
     public ICollection<CategoryItem> Categories { get;}
   }
