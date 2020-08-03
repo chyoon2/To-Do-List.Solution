@@ -114,7 +114,7 @@ namespace ToDoList.Controllers
     {
       _db.Entry(item).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id = item.ItemId});
+      return RedirectToAction("Index", new { id = item.ItemId});
     }
   }
 }

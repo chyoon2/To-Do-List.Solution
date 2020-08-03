@@ -8,13 +8,15 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 
-@using(Html.BeginForm("MarkComplete"))
-    {
-      @Html.HiddenFor(model => model.ItemId)
-      
-      <p>Complete</p>@Html.CheckBoxFor(model => model.Complete)
-      <input type="submit" value="submit"/>
-    } 
+<h3>@Html.DisplayNameFor(model => model.Complete): @Html.DisplayFor(model=> model.Complete)</h3>
+
+@using(Html.BeginForm("MarkComplete", "Items"))
+  {
+    @Html.HiddenFor(model => model.ItemId)
+    @Html.HiddenFor(model => model.Description)
+    <p>Complete:</p>@Html.CheckBoxFor(model => model.Complete)
+    <input type="submit" value="Save" />
+  } 
 
 @if(@Model.Categories.Count == 0)
 {
@@ -24,7 +26,6 @@ else
 {
   <h4>Categories the item belongs to:</h4>
 }
-
  
 
 <ul>
