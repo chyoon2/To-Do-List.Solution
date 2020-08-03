@@ -12,7 +12,8 @@
     {
       @Html.HiddenFor(model => model.ItemId)
       
-      @Html.CheckBoxFor(model => model.Complete)
+      <p>Complete</p>@Html.CheckBoxFor(model => model.Complete)
+      <input type="submit" value="submit"/>
     } 
 
 @if(@Model.Categories.Count == 0)
